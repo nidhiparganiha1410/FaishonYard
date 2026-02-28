@@ -5,6 +5,10 @@ import Home from './pages/Home';
 const PostDetail = React.lazy(() => import('./pages/PostDetail'));
 const Login = React.lazy(() => import('./pages/Login'));
 const Signup = React.lazy(() => import('./pages/Signup'));
+const About = React.lazy(() => import('./pages/About'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
+const AffiliateDisclosure = React.lazy(() => import('./pages/AffiliateDisclosure'));
 import AdminDashboard from './pages/AdminDashboard';
 import Shop from './pages/Shop';
 import Chatbot from './components/Chatbot';
@@ -28,6 +32,10 @@ export default function App() {
     if (path === '/login') return <Login />;
     if (path === '/signup') return <Signup />;
     if (path.startsWith('/admin')) return <AdminDashboard />;
+    if (path === '/about') return <About />;
+    if (path === '/contact') return <Contact />;
+    if (path === '/privacy-policy') return <PrivacyPolicy />;
+    if (path === '/affiliate-disclosure') return <AffiliateDisclosure />;
     return <Home />; // Fallback
   };
 

@@ -7,6 +7,7 @@ import { Post, Product } from '../types';
 import { formatDate, cn } from '../lib/utils';
 import { HeroSkeleton, PostSkeleton } from '../components/Skeletons';
 import CategoryShowcase from '../components/CategoryShowcase';
+import BrandsSlider from '../components/BrandsSlider';
 
 const DEMO_POSTS: Partial<Post>[] = [
   {
@@ -309,6 +310,9 @@ export default function Home() {
 
       {/* NEW: Category Grid Showcase */}
       <CategoryShowcase />
+
+      {/* Top Brands Slider with Offers */}
+      <BrandsSlider />
 
       {/* NEW: Advanced Scrolling Product Cards Section */}
       <section className="bg-brand-gray py-40 overflow-hidden relative">

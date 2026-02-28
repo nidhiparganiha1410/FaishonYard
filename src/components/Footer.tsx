@@ -1,7 +1,13 @@
 import React from 'react';
-import { Instagram, Twitter, Facebook, ArrowRight } from 'lucide-react';
+import { Instagram, Twitter, Facebook, ArrowRight, Linkedin } from 'lucide-react';
 
 export default function Footer() {
+  const navigate = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    e.preventDefault();
+    window.history.pushState({}, '', path);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  };
+
   return (
     <footer className="bg-brand-black text-white py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,9 +21,10 @@ export default function Footer() {
               The definitive guide to luxury minimalism, editorial fashion, and timeless style.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-white/40 transition-colors"><Instagram className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-white/40 transition-colors"><Twitter className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-white/40 transition-colors"><Facebook className="w-5 h-5" /></a>
+              <a href="https://www.facebook.com/jeet.parganiha.5" target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent transition-colors"><Facebook className="w-5 h-5" /></a>
+              <a href="https://www.instagram.com/jeetparganiha/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent transition-colors"><Instagram className="w-5 h-5" /></a>
+              <a href="https://x.com/jeetparganiha" target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent transition-colors"><Twitter className="w-5 h-5" /></a>
+              <a href="https://www.linkedin.com/in/jeet-parganiha-b92305116/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-accent transition-colors"><Linkedin className="w-5 h-5" /></a>
             </div>
           </div>
 
@@ -25,10 +32,10 @@ export default function Footer() {
           <div>
             <h3 className="text-xs font-bold uppercase tracking-widest mb-6">Categories</h3>
             <ul className="space-y-4 text-sm text-white/60">
-              <li><a href="#" className="hover:text-white transition-colors">Runway</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Street Style</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Accessories</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Beauty</a></li>
+              <li><a href="/shop" onClick={(e) => navigate(e, '/shop')} className="hover:text-white transition-colors">Shop</a></li>
+              <li><a href="/" onClick={(e) => navigate(e, '/')} className="hover:text-white transition-colors">Runway</a></li>
+              <li><a href="/" onClick={(e) => navigate(e, '/')} className="hover:text-white transition-colors">Street Style</a></li>
+              <li><a href="/" onClick={(e) => navigate(e, '/')} className="hover:text-white transition-colors">Accessories</a></li>
             </ul>
           </div>
 
@@ -36,10 +43,10 @@ export default function Footer() {
           <div>
             <h3 className="text-xs font-bold uppercase tracking-widest mb-6">Company</h3>
             <ul className="space-y-4 text-sm text-white/60">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Affiliate Disclosure</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="/about" onClick={(e) => navigate(e, '/about')} className="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="/contact" onClick={(e) => navigate(e, '/contact')} className="hover:text-white transition-colors">Contact</a></li>
+              <li><a href="/affiliate-disclosure" onClick={(e) => navigate(e, '/affiliate-disclosure')} className="hover:text-white transition-colors">Affiliate Disclosure</a></li>
+              <li><a href="/privacy-policy" onClick={(e) => navigate(e, '/privacy-policy')} className="hover:text-white transition-colors">Privacy Policy</a></li>
             </ul>
           </div>
 
@@ -63,7 +70,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-white/40 uppercase tracking-widest">
-          <p>© 2024 Fashion Yard. All Rights Reserved.</p>
+          <p>© 2026 Fashion Yard. All Rights Reserved.</p>
           <p className="mt-4 md:mt-0">Crafted for the discerning eye.</p>
         </div>
       </div>
