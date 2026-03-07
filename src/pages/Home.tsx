@@ -221,7 +221,8 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ delay: i * 0.1 }}
-              className="flex-none w-[300px] md:w-[400px] snap-center group cursor-pointer"
+              className="flex-none w-[300px] md:w-[400px] snap-center group cursor-pointer block"
+              onClick={() => window.location.href = `/product/${product.slug}`}
             >
               <div className="aspect-[3/4] overflow-hidden rounded-xl mb-6 relative bg-white/5">
                 <ImageWithFallback

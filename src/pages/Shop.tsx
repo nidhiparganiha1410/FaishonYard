@@ -224,7 +224,8 @@ export default function Shop() {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.95 }}
                                     transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                                    className="group cursor-pointer"
+                                    className="group cursor-pointer block"
+                                    onClick={() => window.location.href = `/product/${product.slug}`}
                                 >
                                     <div className="relative aspect-[3/4] mb-6 overflow-hidden bg-brand-gray rounded-xl">
                                         <img

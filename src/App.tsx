@@ -12,6 +12,7 @@ const AffiliateDisclosure = React.lazy(() => import('./pages/AffiliateDisclosure
 const Category = React.lazy(() => import('./pages/Category'));
 const Profile = React.lazy(() => import('./pages/Profile'));
 const Saved = React.lazy(() => import('./pages/Saved'));
+const Product = React.lazy(() => import('./pages/Product'));
 import AdminDashboard from './pages/AdminDashboard';
 import Shop from './pages/Shop';
 import Chatbot from './components/Chatbot';
@@ -42,6 +43,7 @@ export default function App() {
     if (path === '/contact') return <Contact />;
     if (path === '/privacy-policy') return <PrivacyPolicy />;
     if (path === '/affiliate-disclosure') return <AffiliateDisclosure />;
+    if (path.startsWith('/product/')) return <Product slug={path.split('/')[2]} />;
     return <Home />; // Fallback
   };
 
