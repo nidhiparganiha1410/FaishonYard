@@ -140,6 +140,40 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden absolute top-full left-0 w-full bg-white border-b border-black/5 overflow-hidden shadow-xl"
+          >
+            <nav className="flex flex-col px-4 py-6 space-y-4">
+              <a href="/shop" className="text-sm font-bold uppercase tracking-widest text-brand-accent pb-2 border-b border-black/5">Shop</a>
+              {categories.map((cat) => (
+                <a key={cat.id} href={`/category/${cat.slug}`} className="text-sm font-bold uppercase tracking-widest pb-2 border-b border-black/5">
+                  {cat.name}
+                </a>
+              ))}
+
+              {user ? (
+                <div className="pt-4 space-y-4">
+                  <a href="/profile" className="flex items-center text-sm font-bold uppercase tracking-widest text-black/60"><User className="mr-3 w-4 h-4" /> Profile</a>
+                  <a href="/saved" className="flex items-center text-sm font-bold uppercase tracking-widest text-black/60"><Bookmark className="mr-3 w-4 h-4" /> Saved Posts</a>
+                  <button onClick={() => supabase.auth.signOut()} className="flex items-center text-sm font-bold uppercase tracking-widest text-red-600"><LogOut className="mr-3 w-4 h-4" /> Logout</button>
+                </div>
+              ) : (
+                <div className="pt-4 flex flex-col space-y-4">
+                  <a href="/login" className="text-sm font-bold uppercase tracking-widest text-black/60">Login</a>
+                  <a href="/signup" className="text-sm font-bold uppercase tracking-widest text-brand-accent">Sign Up</a>
+                </div>
+              )}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

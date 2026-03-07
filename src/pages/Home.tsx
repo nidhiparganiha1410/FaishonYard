@@ -8,6 +8,7 @@ import { formatDate, cn } from '../lib/utils';
 import { HeroSkeleton, PostSkeleton } from '../components/Skeletons';
 import CategoryShowcase from '../components/CategoryShowcase';
 import BrandsSlider from '../components/BrandsSlider';
+import ImageWithFallback from '../components/ImageWithFallback';
 
 const DEMO_POSTS: Partial<Post>[] = [
   {
@@ -100,8 +101,8 @@ export default function Home() {
                   transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute inset-0"
                 >
-                  <img
-                    src={featuredPosts[currentSlide]?.featured_image}
+                  <ImageWithFallback
+                    src={featuredPosts[currentSlide]?.featured_image || ''}
                     alt={featuredPosts[currentSlide]?.title}
                     className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-1000"
                   />
@@ -223,10 +224,9 @@ export default function Home() {
               className="flex-none w-[300px] md:w-[400px] snap-center group cursor-pointer"
             >
               <div className="aspect-[3/4] overflow-hidden rounded-xl mb-6 relative bg-white/5">
-                <img
+                <ImageWithFallback
                   src={product.image_url}
                   alt={product.title}
-                  loading="lazy"
                   className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-transparent opacity-60" />
@@ -272,8 +272,8 @@ export default function Home() {
                 className="group"
               >
                 <a href={`/blog/${post.slug}`} className="block mb-8 overflow-hidden rounded-2xl aspect-[4/5] relative">
-                  <img
-                    src={post.featured_image}
+                  <ImageWithFallback
+                    src={post.featured_image || ''}
                     alt={post.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
                   />
@@ -296,7 +296,7 @@ export default function Home() {
                   </p>
                   <div className="pt-4 flex items-center justify-between border-t border-black/5">
                     <div className="flex items-center">
-                      <img src={post.profiles?.avatar_url} alt="" className="w-6 h-6 rounded-full mr-3 grayscale" />
+                      <ImageWithFallback src={post.profiles?.avatar_url || ''} alt="" className="w-6 h-6 rounded-full mr-3 grayscale" />
                       <span className="text-[9px] font-bold uppercase tracking-widest text-black/60">{post.profiles?.username}</span>
                     </div>
                     <ArrowRight className="w-4 h-4 text-black/20 group-hover:text-brand-accent group-hover:translate-x-1 transition-all" />
@@ -343,10 +343,9 @@ export default function Home() {
                 )}
                 style={{ zIndex: i }}
               >
-                <img
+                <ImageWithFallback
                   src={product.image_url}
                   alt={product.title}
-                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                 />
                 <div className="absolute inset-0 bg-brand-black/20 group-hover:bg-brand-black/10 transition-colors" />
