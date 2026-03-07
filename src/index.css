@@ -4,23 +4,43 @@
 @theme {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", serif;
-  
-  --color-brand-black: #0A0A0A;
-  --color-brand-white: #FFFFFF;
-  --color-brand-gray: #F8F8F7;
-  --color-brand-accent: #C5A059; /* Muted Gold */
-  
+
+  --color-brand-black: var(--bg-black);
+  --color-brand-white: var(--bg-white);
+  --color-brand-gray: var(--bg-gray);
+  --color-brand-accent: var(--accent);
+
   --radius-3xl: 2rem;
   --radius-4xl: 3rem;
 }
 
 @layer base {
+  :root {
+    --bg-black: #0A0A0A;
+    --bg-white: #FFFFFF;
+    --bg-gray: #F8F8F7;
+    --accent: #C5A059;
+  }
+
+  .dark {
+    --bg-black: #FFFFFF;
+    --bg-white: #0A0A0A;
+    --bg-gray: #151515;
+    --accent: #D4AF37;
+    /* Slightly brighter gold for dark mode */
+  }
+
   body {
-    @apply bg-brand-white text-brand-black font-sans antialiased selection:bg-brand-accent selection:text-white;
+    @apply bg-brand-white text-brand-black font-sans antialiased selection:bg-brand-accent selection:text-white transition-colors duration-300;
     text-rendering: optimizeLegibility;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif tracking-tight;
   }
 }
@@ -29,11 +49,11 @@
   .glass {
     @apply bg-white/70 backdrop-blur-xl border border-white/20;
   }
-  
+
   .text-balance {
     text-wrap: balance;
   }
-  
+
   .mask-fade-bottom {
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   }
@@ -54,8 +74,13 @@
 
 /* Brands Slider Marquee */
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-marquee {
@@ -72,6 +97,13 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
