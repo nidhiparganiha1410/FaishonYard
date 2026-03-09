@@ -202,7 +202,7 @@ export default function Home() {
       </section>
 
       {/* NEW: Premium Horizontal Product Slider Section */}
-      <section className="bg-brand-black text-white py-32 overflow-hidden border-t border-white/5">
+      <section className="bg-brand-black text-white pt-32 pb-8 overflow-hidden border-t border-white/5">
         <div className="max-w-[1600px] mx-auto px-6 md:px-12 mb-16 flex justify-between items-end">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-accent mb-4 block">The Collection</span>
@@ -263,48 +263,122 @@ export default function Home() {
           {loading ? (
             [1, 2, 3, 4, 5, 6, 7, 8].map(i => <PostSkeleton key={i} />)
           ) : (
-            recentPosts.map((post, i) => (
-              <motion.article
-                key={`${post.id}-${i}`}
+            <>
+              {recentPosts.slice(0, 2).map((post, i) => (
+                <motion.article
+                  key={`${post.id}-${i}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="group"
+                >
+                  <a href={`/blog/${post.slug}`} className="block mb-8 overflow-hidden rounded-2xl aspect-[4/5] relative">
+                    <ImageWithFallback
+                      src={post.featured_image || ''}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
+                  </a>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-accent">
+                        {post.categories?.name}
+                      </span>
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                        {formatDate(post.created_at)}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-serif font-bold leading-tight group-hover:text-brand-accent transition-colors">
+                      <a href={`/blog/${post.slug}`}>{post.title}</a>
+                    </h3>
+                    <p className="text-sm text-black/50 line-clamp-2 font-medium leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                    <div className="pt-4 flex items-center justify-between border-t border-black/5">
+                      <div className="flex items-center">
+                        <ImageWithFallback src={post.profiles?.avatar_url || ''} alt="" className="w-6 h-6 rounded-full mr-3 grayscale" />
+                        <span className="text-[9px] font-bold uppercase tracking-widest text-black/60">{post.profiles?.username}</span>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-black/20 group-hover:text-brand-accent group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+
+              {/* Promo block filling the empty space (col-span-2) */}
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group"
+                transition={{ delay: 0.2 }}
+                className="col-span-1 md:col-span-2 lg:col-span-2 bg-brand-gray rounded-2xl p-10 md:p-14 flex flex-col justify-between group overflow-hidden relative border border-black/5"
               >
-                <a href={`/blog/${post.slug}`} className="block mb-8 overflow-hidden rounded-2xl aspect-[4/5] relative">
-                  <ImageWithFallback
-                    src={post.featured_image || ''}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
-                </a>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-accent">
-                      {post.categories?.name}
-                    </span>
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-black/30">
-                      {formatDate(post.created_at)}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-serif font-bold leading-tight group-hover:text-brand-accent transition-colors">
-                    <a href={`/blog/${post.slug}`}>{post.title}</a>
-                  </h3>
-                  <p className="text-sm text-black/50 line-clamp-2 font-medium leading-relaxed">
-                    {post.excerpt}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-accent/10 rounded-full blur-3xl -mr-20 -mt-20 transition-transform duration-1000 group-hover:scale-150" />
+                <div className="relative z-10">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-accent mb-6 block">Membership</span>
+                  <h3 className="text-3xl md:text-5xl font-serif font-bold leading-tight mb-4">Elevate your inbox.</h3>
+                  <p className="text-black/50 text-sm font-medium leading-relaxed max-w-sm mb-10">
+                    Get weekly curated editorials, VIP access to limited drops, and exclusive insights from top designers.
                   </p>
-                  <div className="pt-4 flex items-center justify-between border-t border-black/5">
-                    <div className="flex items-center">
-                      <ImageWithFallback src={post.profiles?.avatar_url || ''} alt="" className="w-6 h-6 rounded-full mr-3 grayscale" />
-                      <span className="text-[9px] font-bold uppercase tracking-widest text-black/60">{post.profiles?.username}</span>
-                    </div>
-                    <ArrowRight className="w-4 h-4 text-black/20 group-hover:text-brand-accent group-hover:translate-x-1 transition-all" />
-                  </div>
                 </div>
-              </motion.article>
-            ))
+
+                <form className="relative z-10 flex flex-col xl:flex-row gap-3">
+                  <input
+                    type="email"
+                    placeholder="YOUR EMAIL"
+                    className="flex-1 bg-white border border-black/5 rounded-full py-4 px-6 text-brand-black text-xs font-bold tracking-widest focus:outline-none focus:border-brand-accent transition-colors shadow-sm"
+                  />
+                  <button type="button" className="px-8 py-4 bg-brand-black text-white text-[10px] font-bold uppercase tracking-[0.2em] rounded-full hover:bg-brand-accent transition-colors shrink-0">
+                    Subscribe
+                  </button>
+                </form>
+              </motion.div>
+
+              {recentPosts.slice(2).map((post, i) => (
+                <motion.article
+                  key={`${post.id}-${i + 2}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: (i + 2) * 0.1 }}
+                  className="group"
+                >
+                  <a href={`/blog/${post.slug}`} className="block mb-8 overflow-hidden rounded-2xl aspect-[4/5] relative">
+                    <ImageWithFallback
+                      src={post.featured_image || ''}
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
+                  </a>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-brand-accent">
+                        {post.categories?.name}
+                      </span>
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-black/30">
+                        {formatDate(post.created_at)}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-serif font-bold leading-tight group-hover:text-brand-accent transition-colors">
+                      <a href={`/blog/${post.slug}`}>{post.title}</a>
+                    </h3>
+                    <p className="text-sm text-black/50 line-clamp-2 font-medium leading-relaxed">
+                      {post.excerpt}
+                    </p>
+                    <div className="pt-4 flex items-center justify-between border-t border-black/5">
+                      <div className="flex items-center">
+                        <ImageWithFallback src={post.profiles?.avatar_url || ''} alt="" className="w-6 h-6 rounded-full mr-3 grayscale" />
+                        <span className="text-[9px] font-bold uppercase tracking-widest text-black/60">{post.profiles?.username}</span>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-black/20 group-hover:text-brand-accent group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </>
           )}
         </div>
       </section>
