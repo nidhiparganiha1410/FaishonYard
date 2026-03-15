@@ -1,0 +1,28 @@
+
+> fashion-yard@1.0.0 build
+> vite build
+
+[36mvite v6.4.1 [32mbuilding for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 2778 modules transformed.
+Γ£ù Build failed in 8.35s
+error during build:
+src/pages/AdminProducts.tsx (10:13): "formatCurrency" is not exported by "src/lib/utils.ts", imported by "src/pages/AdminProducts.tsx".
+file: C:/Users/jparg/Downloads/FYARD/fashion-yard/src/pages/AdminProducts.tsx:10:13
+
+ 8: import { supabase } from '../lib/supabase';
+ 9: import { Product, Category } from '../types';
+10: import { cn, formatCurrency } from '../lib/utils';
+                 ^
+11: import ProductForm from '../components/admin/ProductForm';
+
+    at getRollupError (file:///C:/Users/jparg/Downloads/FYARD/fashion-yard/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at error (file:///C:/Users/jparg/Downloads/FYARD/fashion-yard/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+    at Module.error (file:///C:/Users/jparg/Downloads/FYARD/fashion-yard/node_modules/rollup/dist/es/shared/node-entry.js:17040:16)
+    at Module.traceVariable (file:///C:/Users/jparg/Downloads/FYARD/fashion-yard/node_modules/rollup/dist/es/shared/node-entry.js:17452:29)
+    at ModuleScope.findVariable (file:///C:/Users/jparg/Downloads/FYARD/fashion-yard/node_modules/rollup/dist/es/shared/node-entry.js:15070:39)
+    at FunctionScope.findVariable (file:///C:/Users/jparg/Downloads/FYARD/fashion-yard/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at FunctionBodyScope.findVariable (file:///C:/Users/jparg/Downloads/FYARD/fashion-yard/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at Identifier.bind (file:///C:/Users/jparg/Downloads/FYARD/fashion-yard/node_modules/rollup/dist/es/shared/node-entry.js:5447:40)
+    at CallExpression.bind (file:///C:/Users/jparg/Downloads/FYARD/fashion-yard/node_modules/rollup/dist/es/shared/node-entry.js:2829:23)
+    at CallExpression.bind (file:///C:/Users/jparg/Downloads/FYARD/fashion-yard/node_modules/rollup/dist/es/shared/node-entry.js:12179:15)

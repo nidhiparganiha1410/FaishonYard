@@ -405,6 +405,7 @@ export default function AdminDashboard() {
     { id: 'affiliates', label: 'Affiliates', icon: ExternalLink },
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
+  console.log('DEBUG: Admin Dashboard sidebar items:', sidebarItems);
 
   return (
     <div className="min-h-screen bg-brand-gray flex">

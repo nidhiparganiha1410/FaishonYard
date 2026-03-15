@@ -32,8 +32,8 @@ const DEMO_POSTS_MAP: Record<string, Partial<Post>> = {
     created_at: new Date().toISOString(),
     published_at: new Date().toISOString(),
     profiles: { username: 'Julian Thorne', avatar_url: 'https://i.pravatar.cc/150?u=julian' } as any
-  }
-};
+  },
+  'algo-elegance': {
     id: 'demo-3',
     title: 'The Algorithm of Elegance',
     slug: 'algo-elegance',
