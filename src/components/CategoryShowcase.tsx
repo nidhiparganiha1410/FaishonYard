@@ -86,26 +86,26 @@ export default function CategoryShowcase() {
                 </a>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-                <div className="md:col-span-7 aspect-[4/5] md:aspect-auto md:h-[600px] relative group cursor-pointer overflow-hidden rounded-xl">
+                <a href={`/blog/${posts[0].slug}`} className="block md:col-span-7 aspect-[4/5] md:aspect-auto md:h-[600px] relative group cursor-pointer overflow-hidden rounded-xl">
                     <ImageWithFallback src={posts[0].featured_image || ''} alt={posts[0].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-8">
                         <h3 className="text-3xl font-serif font-bold text-white mb-2">{posts[0].title}</h3>
                         <p className="text-white/60 text-sm line-clamp-2">{posts[0].excerpt}</p>
                     </div>
-                </div>
+                </a>
                 <div className="md:col-span-5 flex flex-col gap-8 h-full">
-                    <div className="flex-1 aspect-video relative group cursor-pointer overflow-hidden rounded-xl">
+                    <a href={`/blog/${posts[1].slug}`} className="block flex-1 aspect-video relative group cursor-pointer overflow-hidden rounded-xl">
                         <ImageWithFallback src={posts[1].featured_image || ''} alt={posts[1].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6">
                             <h3 className="text-xl font-serif font-bold text-white">{posts[1].title}</h3>
                         </div>
-                    </div>
-                    <div className="flex-1 aspect-video relative group cursor-pointer overflow-hidden rounded-xl">
+                    </a>
+                    <a href={`/blog/${posts[2].slug}`} className="block flex-1 aspect-video relative group cursor-pointer overflow-hidden rounded-xl">
                         <ImageWithFallback src={posts[2].featured_image || ''} alt={posts[2].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
                         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-6">
                             <h3 className="text-xl font-serif font-bold text-white">{posts[2].title}</h3>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

@@ -18,7 +18,7 @@ const SUGGESTIONS = [
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { id: 'initial', sender: 'bot', text: 'Hello. How can I assist you with your editorial exploration today?' }
+        { id: 'initial', sender: 'bot', text: 'how can help you dear' }
     ]);
     const [inputValue, setInputValue] = useState('');
     const [isListening, setIsListening] = useState(false);
@@ -100,15 +100,15 @@ export default function Chatbot() {
 
     return (
         <>
-            {/* Floating Button */}
+            {/* Floating Button / Robot Trigger */}
             <motion.button
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={cn(
-                    "fixed bottom-8 right-8 z-[100] w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500",
-                    isOpen ? "bg-white text-brand-black border border-black/10" : "bg-brand-black text-white"
+                    "fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100] flex items-center justify-center transition-all duration-500",
+                    isOpen ? "w-14 h-14 rounded-full bg-white text-brand-black border border-black/10 shadow-2xl" : "bg-transparent"
                 )}
                 onClick={() => setIsOpen(!isOpen)}
             >
@@ -118,8 +118,29 @@ export default function Chatbot() {
                             <X className="w-6 h-6" />
                         </motion.div>
                     ) : (
-                        <motion.div key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
-                            <MessageSquare className="w-6 h-6" />
+                        <motion.div key="chat" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 20, opacity: 0 }} className="relative pointer-events-auto cursor-pointer">
+                            
+                            {/* Popup Bubble */}
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.5, y: 10 }}
+                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                transition={{ delay: 1, duration: 0.5 }}
+                                className="absolute -top-14 right-4 w-40 bg-white border border-black/10 shadow-xl rounded-2xl rounded-br-sm p-3 z-50 pointer-events-none"
+                            >
+                                <p className="text-[11px] font-bold text-brand-black text-center leading-tight">
+                                    how can I help you
+                                </p>
+                                <div className="absolute -bottom-1 right-4 w-3 h-3 bg-white border-b border-r border-black/10 transform rotate-45"></div>
+                            </motion.div>
+
+                            {/* Floating Robot */}
+                            <motion.img 
+                                animate={{ y: [0, -8, 0] }}
+                                transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                                src="/assets/walking-robot.png" 
+                                alt="Helpful Robot" 
+                                className="w-24 h-36 md:w-28 md:h-40 object-contain drop-shadow-2xl" 
+                            />
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -138,11 +159,11 @@ export default function Chatbot() {
                         {/* Header */}
                         <div className="bg-brand-gray p-4 border-b border-black/5 flex items-center justify-between">
                             <div className="flex items-center">
-                                <div className="w-8 h-8 bg-brand-black rounded-full flex items-center justify-center mr-3">
-                                    <Sparkles className="w-4 h-4 text-white" />
+                                <div className="w-10 h-10 bg-[#EFEFEF] rounded-full flex items-center justify-center mr-3 overflow-hidden border border-black/10 shadow-sm">
+                                    <img src="/assets/walking-robot.png" alt="AI Agent" className="w-[120%] h-[120%] object-contain object-top mt-2" />
                                 </div>
                                 <div>
-                                    <h3 className="text-xs font-bold uppercase tracking-widest text-brand-black">AI Assistant</h3>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest text-[#E54D16]">AI Assistant</h3>
                                     <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-black/40">Online</p>
                                 </div>
                             </div>

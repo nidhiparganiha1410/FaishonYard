@@ -9,6 +9,9 @@
   --color-brand-white: var(--bg-white);
   --color-brand-gray: var(--bg-gray);
   --color-brand-accent: var(--accent);
+  --color-brand-accent-deep: var(--accent-deep);
+  --color-hero-orange: var(--hero-orange);
+  --color-brand-accent-cta: var(--accent-cta);
 
   --radius-3xl: 2rem;
   --radius-4xl: 3rem;
@@ -16,18 +19,13 @@
 
 @layer base {
   :root {
-    --bg-black: #0A0A0A;
+    --bg-black: #1c1917;
     --bg-white: #FFFFFF;
-    --bg-gray: #F8F8F7;
-    --accent: #C5A059;
-  }
-
-  .dark {
-    --bg-black: #FFFFFF;
-    --bg-white: #0A0A0A;
-    --bg-gray: #151515;
-    --accent: #D4AF37;
-    /* Slightly brighter gold for dark mode */
+    --bg-gray: #FFF7ED;
+    --accent: #EA580C;
+    --accent-deep: #C2410C;
+    --accent-cta: #991b1b;
+    --hero-orange: #F97316;
   }
 
   body {
@@ -69,7 +67,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-black/10 rounded-full hover:bg-black/20 transition-colors;
+  @apply bg-orange-200 rounded-full hover:bg-orange-300 transition-colors;
 }
 
 /* Brands Slider Marquee */

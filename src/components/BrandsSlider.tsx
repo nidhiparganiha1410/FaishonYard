@@ -24,10 +24,11 @@ export default function BrandsSlider() {
             <div className="relative">
                 <div className="flex animate-marquee">
                     {[...BRANDS, ...BRANDS].map((brand, i) => (
-                        <motion.div
+                        <motion.a
                             key={`${brand.name}-${i}`}
+                            href="/shop"
                             whileHover={{ scale: 1.05, y: -4 }}
-                            className="flex-none w-[200px] mx-6 bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center shadow-sm border border-black/5 hover:shadow-xl transition-shadow duration-500 cursor-pointer group"
+                            className="flex-none w-[200px] mx-6 bg-white rounded-2xl p-8 flex flex-col items-center justify-center text-center shadow-sm border border-black/5 hover:shadow-xl transition-shadow duration-500 cursor-pointer group block"
                         >
                             <div className="w-20 h-16 flex items-center justify-center mb-4 grayscale group-hover:grayscale-0 transition-all duration-500">
                                 <img
@@ -42,7 +43,7 @@ export default function BrandsSlider() {
                             </div>
                             <h3 className="text-sm font-bold uppercase tracking-widest mb-1">{brand.name}</h3>
                             <span className="text-[10px] font-bold uppercase tracking-widest text-brand-accent">{brand.offer}</span>
-                        </motion.div>
+                        </motion.a>
                     ))}
                 </div>
             </div>

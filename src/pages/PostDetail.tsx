@@ -197,12 +197,12 @@ export default function PostDetail({ slug }: { slug: string }) {
 
           {/* Main Content */}
           <main className="lg:col-span-6">
-            <div className="prose prose-lg max-w-none font-serif leading-relaxed text-black/80">
-              <p className="text-2xl font-light italic mb-12 leading-relaxed text-black/60">
+            <div className="prose prose-2xl max-w-none font-serif leading-relaxed text-brand-black">
+              <p className="text-2xl md:text-3xl font-medium italic mb-12 leading-relaxed text-black/70">
                 "{post.excerpt}"
               </p>
 
-              <div className="space-y-8">
+              <div className="space-y-10 text-xl md:text-2xl font-semibold leading-[1.8] text-black/90 tracking-wide">
                 <p>In an era where technology and tradition merge seamlessly, the luxury fashion landscape is undergoing a profound transformation. Designers are no longer confined to physical ateliers — instead, they leverage cutting-edge tools to push the boundaries of creativity and craftsmanship.</p>
 
                 <h2 className="text-3xl font-serif font-bold mt-16 mb-6">The Evolution of Modern Aesthetics</h2>
@@ -220,10 +220,10 @@ export default function PostDetail({ slug }: { slug: string }) {
                   </div>
                 </div>
 
-                <h2 className="text-3xl font-serif font-bold mt-16 mb-6">Sustainability Meets Innovation</h2>
+                <h2 className="text-4xl md:text-5xl font-serif font-bold mt-16 mb-8 text-black">Sustainability Meets Innovation</h2>
                 <p>Beyond aesthetics, the fashion industry is embracing sustainable practices powered by data-driven insights. Virtual prototyping reduces waste, while blockchain technology ensures supply chain transparency — creating a future where luxury and responsibility coexist harmoniously.</p>
 
-                <blockquote className="border-l-4 border-brand-accent pl-8 py-4 my-12 text-xl italic text-black/60">
+                <blockquote className="border-l-4 border-brand-accent pl-8 py-6 my-16 text-2xl md:text-3xl font-medium italic text-black/70">
                   "The most enduring luxury is not what we wear, but how thoughtfully it was created."
                 </blockquote>
 

@@ -9,14 +9,17 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-brand-black text-white py-20">
+    <footer className="bg-[#1c1917] text-white py-20 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
-            <h2 className="text-3xl font-serif font-bold tracking-tighter uppercase mb-6">
-              Fashion Yard
-            </h2>
+            <a href="/" className="flex items-center gap-3 mb-6 group">
+              <img src="/assets/logo.png" alt="Logo" className="w-10 h-10 object-contain group-hover:scale-110 transition-all duration-500 drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]" />
+              <h2 className="text-2xl font-serif font-bold tracking-tighter uppercase">
+                FaishonYard
+              </h2>
+            </a>
             <p className="text-white/60 text-sm leading-relaxed mb-8">
               The definitive guide to luxury minimalism, editorial fashion, and timeless style.
             </p>

@@ -5,6 +5,7 @@ import { MOCK_PRODUCTS } from '../data/mockProducts';
 import { Product } from '../types';
 import { cn } from '../lib/utils';
 import { HeroSkeleton, PostSkeleton } from '../components/Skeletons';
+import ImageWithFallback from '../components/ImageWithFallback';
 
 type SortOption = 'latest' | 'popular' | 'price-asc' | 'price-desc';
 
@@ -228,10 +229,9 @@ export default function Shop() {
                                     onClick={() => window.location.href = `/product/${product.slug}`}
                                 >
                                     <div className="relative aspect-[3/4] mb-6 overflow-hidden bg-brand-gray rounded-xl">
-                                        <img
+                                        <ImageWithFallback
                                             src={product.image_url}
                                             alt={product.title}
-                                            loading="lazy"
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
                                         />
 

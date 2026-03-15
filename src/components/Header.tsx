@@ -4,8 +4,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { supabase } from '../lib/supabase';
 import { cn } from '../lib/utils';
 import { Category } from '../types';
-import ThemeToggle from './ThemeToggle';
-
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -29,13 +27,32 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-black/5">
+    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-orange-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <a href="/" className="text-2xl font-serif font-bold tracking-tighter uppercase">
-              Fashion Yard
+            <a href="/" className="group flex items-center gap-3">
+              <motion.div
+                whileHover={{ scale: 1.05, rotate: 5 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-brand-accent/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <img 
+                  src="/assets/logo.png" 
+                  alt="FaishonYard Logo" 
+                  className="w-10 h-10 md:w-12 md:h-12 object-contain relative z-10 drop-shadow-[0_0_8px_rgba(229,77,22,0.3)]"
+                />
+              </motion.div>
+              <div className="flex flex-col">
+                <span className="text-xl md:text-2xl font-serif font-black tracking-tighter uppercase text-brand-black group-hover:text-brand-accent transition-colors leading-none">
+                  FaishonYard
+                </span>
+                <span className="text-[8px] font-bold uppercase tracking-[0.4em] text-black/30 group-hover:text-brand-accent/50 transition-colors mt-0.5">
+                  Editorial • Lux
+                </span>
+              </div>
             </a>
           </div>
 
@@ -43,7 +60,7 @@ export default function Header() {
           <nav className="hidden md:flex space-x-8 items-center">
             <a
               href="/shop"
-              className="text-sm font-medium uppercase tracking-widest text-brand-accent hover:text-black/60 transition-colors mr-2"
+              className="text-sm font-medium uppercase tracking-widest text-[#EA580C] hover:text-[#C2410C] transition-colors mr-2"
             >
               Shop
             </a>
@@ -66,8 +83,6 @@ export default function Header() {
 
           {/* Actions */}
           <div className="flex items-center space-x-4 md:space-x-6">
-            <ThemeToggle />
-
             <button
               onClick={() => setIsSearchOpen(!isSearchOpen)}
               className="p-2 hover:bg-black/5 rounded-full transition-colors"
@@ -104,7 +119,7 @@ export default function Header() {
             ) : (
               <div className="hidden md:flex items-center space-x-4">
                 <a href="/login" className="text-sm font-medium uppercase tracking-widest">Login</a>
-                <a href="/signup" className="px-4 py-2 bg-brand-black text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-black/80 transition-colors">
+                <a href="/signup" className="px-4 py-2 bg-[#EA580C] text-white text-xs font-bold uppercase tracking-widest rounded-full hover:bg-[#C2410C] transition-colors">
                   Sign Up
                 </a>
               </div>
@@ -154,7 +169,7 @@ export default function Header() {
             className="md:hidden absolute top-full left-0 w-full bg-white border-b border-black/5 overflow-hidden shadow-xl"
           >
             <nav className="flex flex-col px-4 py-6 space-y-4">
-              <a href="/shop" className="text-sm font-bold uppercase tracking-widest text-brand-accent pb-2 border-b border-black/5">Shop</a>
+              <a href="/shop" className="text-sm font-bold uppercase tracking-widest text-[#EA580C] pb-2 border-b border-black/5">Shop</a>
               {categories.map((cat) => (
                 <a key={cat.id} href={`/category/${cat.slug}`} className="text-sm font-bold uppercase tracking-widest pb-2 border-b border-black/5">
                   {cat.name}
