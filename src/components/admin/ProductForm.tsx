@@ -419,29 +419,32 @@ export default function ProductForm({ product, categories, onClose, onSuccess }:
                         type="text"
                         value={formData.affiliate_link}
                         onChange={(e) => setFormData({...formData, affiliate_link: e.target.value})}
-                        className="w-full px-4 py-3 bg-brand-gray/50 border border-brand-accent/20 rounded-xl text-sm focus:outline-none focus:border-brand-accent"
-                        placeholder="https://amazon.com/affiliate..."
+                        className="w-full px-4 py-3 bg-brand-gray/50 border border-brand-accent/20 rounded-xl text-sm focus:outline-none focus:border-brand-accent transition-all hover:bg-white"
+                        placeholder="https://amazon.com/affiliate-link-here..."
                       />
                     </div>
-                    {formData.affiliate_link && (
-                      <button
-                        type="button"
-                        onClick={handleMagicFill}
-                        disabled={isFetchingUrl}
-                        className="h-[46px] px-6 bg-brand-accent text-white rounded-xl text-[10px] font-bold uppercase tracking-widest hover:bg-black transition-all flex items-center justify-center disabled:opacity-50"
-                      >
-                        {isFetchingUrl ? (
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                        ) : (
-                          <>
-                            <Wand2 className="w-3.5 h-3.5 mr-2" />
-                            Magic Fill
-                          </>
-                        )}
-                      </button>
-                    )}
+                    <button
+                      type="button"
+                      onClick={handleMagicFill}
+                      disabled={isFetchingUrl || !formData.affiliate_link}
+                      className={cn(
+                        "h-[46px] px-6 rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 shadow-sm",
+                        !formData.affiliate_link 
+                          ? "bg-brand-gray text-black/20 cursor-not-allowed" 
+                          : "bg-brand-accent text-white hover:bg-black hover:scale-[1.02] active:scale-[0.98]"
+                      )}
+                    >
+                      {isFetchingUrl ? (
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        <>
+                          <Wand2 className="w-3.5 h-3.5" />
+                          <span>Magic Fill</span>
+                        </>
+                      )}
+                    </button>
                   </div>
-                  <p className="text-[9px] text-black/40 italic">When provided, users will be redirected to this link to purchase. Use "Magic Fill" to fetch details.</p>
+                  <p className="text-[9px] text-black/40 font-medium italic">Paste an affiliate link above and use <b>Magic Fill</b> to automatically pull product details, price, and images.</p>
                 </div>
             </div>
           )}
