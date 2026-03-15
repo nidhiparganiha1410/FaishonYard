@@ -14,6 +14,7 @@ const Profile = React.lazy(() => import('./pages/Profile'));
 const Saved = React.lazy(() => import('./pages/Saved'));
 const Product = React.lazy(() => import('./pages/Product'));
 import AdminDashboard from './pages/AdminDashboard';
+import AdminGuard from './components/AdminGuard';
 import Shop from './pages/Shop';
 import Chatbot from './components/Chatbot';
 import SubscriptionPopup from './components/SubscriptionPopup';
@@ -35,7 +36,13 @@ export default function App() {
     if (path.startsWith('/blog/')) return <PostDetail slug={path.split('/')[2]} />;
     if (path === '/login') return <Login />;
     if (path === '/signup') return <Signup />;
-    if (path.startsWith('/admin')) return <AdminDashboard />;
+    if (path.startsWith('/admin')) {
+      return (
+        <AdminGuard>
+          <AdminDashboard />
+        </AdminGuard>
+      );
+    }
     if (path.startsWith('/category/')) return <Category slug={path.split('/')[2]} />;
     if (path === '/profile') return <Profile />;
     if (path === '/saved') return <Saved />;

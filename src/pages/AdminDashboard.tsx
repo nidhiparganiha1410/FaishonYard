@@ -249,24 +249,44 @@ export default function AdminDashboard() {
 
   async function fetchAll() {
     setLoading(true);
-    const [postsRes, catsRes, usersRes, affRes] = await Promise.all([
-      supabase.from('posts').select('*, categories(*), profiles(*)').order('created_at', { ascending: false }),
-      supabase.from('categories').select('*').order('name'),
-      supabase.from('profiles').select('*').order('created_at', { ascending: false }),
-      supabase.from('affiliate_links').select('*').order('created_at', { ascending: false }),
-    ]);
-    if (postsRes.data) setPosts(postsRes.data);
-    if (catsRes.data) setCategories(catsRes.data);
-    if (usersRes.data) setUsers(usersRes.data);
-    if (affRes.data) setAffiliates(affRes.data);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('Not authenticated');
 
-    // Compute stats
-    const totalPosts = postsRes.data?.length || 0;
-    const totalUsers = usersRes.data?.length || 0;
-    const totalViews = postsRes.data?.reduce((s, p) => s + (p.view_count || 0), 0) || 0;
-    setStats({ totalPosts, totalUsers, totalViews });
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
 
-    setLoading(false);
+      if (profile?.role !== 'admin') {
+        window.location.href = '/';
+        return;
+      }
+
+      const [postsRes, catsRes, usersRes, affRes] = await Promise.all([
+        supabase.from('posts').select('*, categories(*), profiles(*)').order('created_at', { ascending: false }),
+        supabase.from('categories').select('*').order('name'),
+        supabase.from('profiles').select('*').order('created_at', { ascending: false }),
+        supabase.from('affiliate_links').select('*').order('created_at', { ascending: false }),
+      ]);
+      
+      if (postsRes.data) setPosts(postsRes.data);
+      if (catsRes.data) setCategories(catsRes.data);
+      if (usersRes.data) setUsers(usersRes.data);
+      if (affRes.data) setAffiliates(affRes.data);
+
+      // Compute stats
+      const totalPosts = postsRes.data?.length || 0;
+      const totalUsers = usersRes.data?.length || 0;
+      const totalViews = postsRes.data?.reduce((s, p) => s + (p.view_count || 0), 0) || 0;
+      setStats({ totalPosts, totalUsers, totalViews });
+    } catch (err) {
+      console.error('Admin unauthorized:', err);
+      window.location.href = '/';
+    } finally {
+      setLoading(false);
+    }
   }
 
   // ─── ARTICLE CRUD ──────────────────────────────────────────────────────────
