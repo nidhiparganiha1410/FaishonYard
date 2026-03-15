@@ -53,12 +53,18 @@ export interface Product {
   slug: string;
   description: string;
   price: number;
-  formatted_price: string;
-  image_url: string;
-  category: string;
+  offer_price?: number;
+  specification: Record<string, string>;
+  variants: Array<{ color: string; hex: string }>;
+  sizes: string[];
+  featured_image: string;
+  images: string[];
+  category_id: number;
+  affiliate_link?: string;
   is_new: boolean;
   is_popular: boolean;
   rating: number;
   reviews_count: number;
+  stock_status: 'in_stock' | 'out_of_stock' | 'pre_order';
   created_at: string;
 }

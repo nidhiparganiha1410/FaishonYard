@@ -13,10 +13,10 @@ import ImageWithFallback from '../components/ImageWithFallback';
 const DEMO_POSTS: Partial<Post>[] = [
   {
     id: 'demo-1',
-    title: 'The Future of Digital Couture: 2026 and Beyond',
-    slug: 'future-digital-couture',
-    excerpt: 'Exploring how generative AI and augmented reality are redefining the luxury atelier experience.',
-    featured_image: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80',
+    title: 'The Algorithm of Elegance: AI Couture 2026',
+    slug: 'algo-elegance',
+    excerpt: 'Exploring how generative neural networks are redefining the luxury haute couture experience.',
+    featured_image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80',
     categories: { name: 'Innovation' } as any,
     view_count: 15400,
     read_time: 12,

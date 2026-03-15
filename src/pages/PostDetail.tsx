@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { Post, Comment } from '../types';
 import { formatDate } from '../lib/utils';
-import { Clock, Eye, Share2, Bookmark, MessageSquare, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Clock, Eye, Share2, Bookmark, MessageSquare } from 'lucide-react';
 import { motion } from 'motion/react';
+import { SEO_ARTICLES } from '../data/seoArticles';
 
 const DEMO_POSTS_MAP: Record<string, Partial<Post>> = {
   'future-digital-couture': {
@@ -31,8 +32,8 @@ const DEMO_POSTS_MAP: Record<string, Partial<Post>> = {
     created_at: new Date().toISOString(),
     published_at: new Date().toISOString(),
     profiles: { username: 'Julian Thorne', avatar_url: 'https://i.pravatar.cc/150?u=julian' } as any
-  },
-  'algo-elegance': {
+  }
+};
     id: 'demo-3',
     title: 'The Algorithm of Elegance',
     slug: 'algo-elegance',
@@ -82,6 +83,14 @@ export default function PostDetail({ slug }: { slug: string }) {
     fetchPost();
   }, [slug]);
 
+  useEffect(() => {
+    if (post) {
+      document.title = post.meta_title || post.title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', post.meta_description || post.excerpt);
+    }
+  }, [post]);
+
   async function fetchPost() {
     const { data, error } = await supabase
       .from('posts')
@@ -94,17 +103,22 @@ export default function PostDetail({ slug }: { slug: string }) {
       incrementViewCount(data.id);
       fetchComments(data.id);
     } else {
-      // Fallback to demo post
-      const demoPost = DEMO_POSTS_MAP[slug];
-      if (demoPost) {
-        setPost(demoPost as Post);
+      // Fallback to SEO or demo post
+      const seoPost = SEO_ARTICLES[slug] || DEMO_POSTS_MAP[slug];
+      if (seoPost) {
+        setPost(seoPost as Post);
       }
     }
     setLoading(false);
   }
 
   async function incrementViewCount(postId: string) {
-    await fetch(`/api/posts/${postId}/view`, { method: 'POST' });
+    if (postId.startsWith('demo')) return;
+    try {
+      await fetch(`/api/posts/${postId}/view`, { method: 'POST' });
+    } catch (e) {
+      console.warn('View count increment failed');
+    }
   }
 
   async function fetchComments(postId: string) {
@@ -115,6 +129,69 @@ export default function PostDetail({ slug }: { slug: string }) {
       .order('created_at', { ascending: false });
     if (data) setComments(data);
   }
+
+  const renderContent = (content: any) => {
+    if (!content) return null;
+
+    // Handle structured JSON content from seoArticles
+    if (content.sections) {
+      return content.sections.map((section: any, idx: number) => {
+        switch (section.type) {
+          case 'h2':
+            return <h2 key={idx} className="text-3xl font-serif font-bold mt-16 mb-6 text-brand-black">{section.text}</h2>;
+          case 'h3':
+            return <h3 key={idx} className="text-2xl font-serif font-bold mt-12 mb-4 text-brand-black">{section.text}</h3>;
+          case 'p':
+            return <p key={idx} className="mb-6 leading-relaxed text-lg text-black/80 font-medium">{section.text}</p>;
+          case 'table':
+            return (
+              <div key={idx} className="my-12 overflow-x-auto rounded-xl border border-black/5">
+                <table className="w-full text-left text-sm">
+                  <thead className="bg-brand-gray/50 border-b border-black/5">
+                    <tr>
+                      {section.headers.map((h: string, i: number) => (
+                        <th key={i} className="px-6 py-4 font-bold uppercase tracking-widest">{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-black/5">
+                    {section.rows.map((row: string[], ri: number) => (
+                      <tr key={ri} className="hover:bg-brand-gray/20 transition-colors">
+                        {row.map((cell, ci) => (
+                          <td key={ci} className="px-6 py-4 font-medium">{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          case 'faq':
+            return (
+              <div key={idx} className="my-16 p-8 bg-brand-gray border border-black/5 rounded-3xl">
+                <h3 className="text-2xl font-serif font-bold mb-8">{section.title}</h3>
+                <div className="space-y-6">
+                  {section.items.map((item: any, ii: number) => (
+                    <div key={ii} className="group">
+                      <h4 className="text-lg font-bold mb-3 flex items-start gap-4">
+                        <span className="w-6 h-6 rounded-full bg-brand-accent text-white flex items-center justify-center text-[10px] shrink-0 mt-1">Q</span>
+                        {item.q}
+                      </h4>
+                      <p className="text-black/60 pl-10 text-base leading-relaxed">{item.a}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          default:
+            return null;
+        }
+      });
+    }
+
+    // Default text fallback
+    return <div className="space-y-6" dangerouslySetInnerHTML={{ __html: content }} />;
+  };
 
   if (loading) return <div className="h-screen flex items-center justify-center font-serif text-2xl animate-pulse text-brand-black">Loading...</div>;
   if (!post) return (
@@ -186,10 +263,15 @@ export default function PostDetail({ slug }: { slug: string }) {
               <div className="p-6 bg-brand-gray rounded-2xl">
                 <h4 className="text-[10px] font-bold uppercase tracking-widest mb-4">Table of Contents</h4>
                 <ul className="space-y-3 text-sm text-black/60 font-medium">
-                  <li className="hover:text-black cursor-pointer transition-colors">Introduction</li>
-                  <li className="hover:text-black cursor-pointer transition-colors">The Minimalist Philosophy</li>
-                  <li className="hover:text-black cursor-pointer transition-colors">Key Pieces for 2026</li>
-                  <li className="hover:text-black cursor-pointer transition-colors">Conclusion</li>
+                  {post.content?.sections?.filter((s: any) => s.type === 'h2').map((s: any, i: number) => (
+                    <li key={i} className="hover:text-black cursor-pointer transition-colors line-clamp-1">{s.text}</li>
+                  )) || (
+                    <>
+                      <li className="hover:text-black cursor-pointer transition-colors">Introduction</li>
+                      <li className="hover:text-black cursor-pointer transition-colors">Key Philosophy</li>
+                      <li className="hover:text-black cursor-pointer transition-colors">Conclusion</li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>
@@ -203,31 +285,7 @@ export default function PostDetail({ slug }: { slug: string }) {
               </p>
 
               <div className="space-y-10 text-xl md:text-2xl font-semibold leading-[1.8] text-black/90 tracking-wide">
-                <p>In an era where technology and tradition merge seamlessly, the luxury fashion landscape is undergoing a profound transformation. Designers are no longer confined to physical ateliers — instead, they leverage cutting-edge tools to push the boundaries of creativity and craftsmanship.</p>
-
-                <h2 className="text-3xl font-serif font-bold mt-16 mb-6">The Evolution of Modern Aesthetics</h2>
-                <p>The intersection of artificial intelligence and haute couture has birthed an entirely new design paradigm. From predictive trend analysis to generative pattern creation, technology serves as both muse and medium for the contemporary designer.</p>
-
-                <div className="my-12 p-8 bg-brand-gray border border-black/5 rounded-3xl flex items-center space-x-8">
-                  <div className="w-32 h-32 flex-shrink-0 bg-white rounded-2xl overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?auto=format&fit=crop&w=400&q=80" alt="Product" className="w-full h-full object-cover" />
-                  </div>
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-black/40 mb-2 block">Editor's Choice</span>
-                    <h4 className="text-xl font-serif font-bold mb-2">The Essential Silk Blazer</h4>
-                    <p className="text-sm text-black/60 mb-4">A timeless piece that defines the luxury minimalist wardrobe.</p>
-                    <a href="/shop" className="inline-block text-xs font-bold uppercase tracking-widest border-b border-black pb-1">Shop Now</a>
-                  </div>
-                </div>
-
-                <h2 className="text-4xl md:text-5xl font-serif font-bold mt-16 mb-8 text-black">Sustainability Meets Innovation</h2>
-                <p>Beyond aesthetics, the fashion industry is embracing sustainable practices powered by data-driven insights. Virtual prototyping reduces waste, while blockchain technology ensures supply chain transparency — creating a future where luxury and responsibility coexist harmoniously.</p>
-
-                <blockquote className="border-l-4 border-brand-accent pl-8 py-6 my-16 text-2xl md:text-3xl font-medium italic text-black/70">
-                  "The most enduring luxury is not what we wear, but how thoughtfully it was created."
-                </blockquote>
-
-                <p>As we look ahead, the convergence of digital innovation and artisanal craftsmanship promises to redefine not just what we wear, but how we think about fashion itself. The future belongs to those who can bridge the gap between heritage and horizon.</p>
+                {renderContent(post.content)}
               </div>
             </div>
 

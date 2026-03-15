@@ -12,20 +12,20 @@ const MOCK_CATEGORY_POSTS: Partial<Post>[][] = [
     // Category 1 - Innovation
     [
         { id: 'cat1-1', title: 'The Algorithm of Elegance', excerpt: 'How AI shapes the new runway.', slug: 'algo-elegance', featured_image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() },
-        { id: 'cat1-2', title: 'Data-Driven Design', excerpt: 'Predicting the next silhouette.', slug: 'data-design', featured_image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() },
-        { id: 'cat1-3', title: 'Virtual Threads', excerpt: 'Dressing the metaverse.', slug: 'virtual-threads', featured_image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() }
+        { id: 'cat1-2', title: 'Virtual Threads', excerpt: 'Dressing the metaverse.', slug: 'virtual-threads', featured_image: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() },
+        { id: 'cat1-3', title: 'Neural Design Tech', excerpt: 'Predicting the next silhouette.', slug: 'algo-elegance', featured_image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() }
     ],
     // Category 2 - Minimalism
     [
-        { id: 'cat2-1', title: 'The Evolution of Simplicity', excerpt: 'Redefining luxury through restraint.', slug: 'algo-elegance', featured_image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() },
-        { id: 'cat2-2', title: 'Smart Outdoor Runway', excerpt: 'Where nature meets haute couture.', slug: 'data-design', featured_image: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() },
-        { id: 'cat2-3', title: 'Monochrome Mastery', excerpt: 'The enduring power of black and white.', slug: 'virtual-threads', featured_image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() }
+        { id: 'cat2-1', title: 'The Texture of Silence', excerpt: 'Redefining luxury through restraint.', slug: 'quiet-luxury-texture', featured_image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() },
+        { id: 'cat2-2', title: 'Quiet Luxury Philosophy', excerpt: 'Where nature meets haute couture.', slug: 'quiet-luxury-texture', featured_image: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() },
+        { id: 'cat2-3', title: 'Minimalist Mastery', excerpt: 'The enduring power of silence.', slug: 'quiet-luxury-texture', featured_image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() }
     ],
     // Category 3 - Culture
     [
-        { id: 'cat3-1', title: 'Fashion Capitals Reimagined', excerpt: 'How global cities shape style.', slug: 'algo-elegance', featured_image: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() },
-        { id: 'cat3-2', title: 'Heritage & Innovation', excerpt: 'Blending tradition with tomorrow.', slug: 'data-design', featured_image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() },
-        { id: 'cat3-3', title: 'Street to Runway', excerpt: 'How urban culture fuels high fashion.', slug: 'virtual-threads', featured_image: 'https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() }
+        { id: 'cat3-1', title: 'Heritage Meets Horizon', excerpt: 'How global cities shape style.', slug: 'virtual-threads', featured_image: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() },
+        { id: 'cat3-2', title: 'Global Identity', excerpt: 'Blending tradition with tomorrow.', slug: 'virtual-threads', featured_image: 'https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() },
+        { id: 'cat3-3', title: 'Culture & Modernity', excerpt: 'How urban culture fuels high fashion.', slug: 'virtual-threads', featured_image: 'https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?auto=format&fit=crop&w=800&q=80', created_at: new Date().toISOString() }
     ]
 ];
 

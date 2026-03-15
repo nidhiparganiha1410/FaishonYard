@@ -2,12 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 import {
   LayoutDashboard, FileText, FolderTree, Users, Settings, ExternalLink, Plus, Search,
-  Edit, Trash, X, Check, Eye, EyeOff, Save, ArrowLeft, Image, Link2, Globe, ChevronDown
+  Edit, Trash, X, Check, Eye, EyeOff, Save, ArrowLeft, Image, Link2, Globe, ChevronDown, ShoppingBag
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { Post, Profile, Category } from '../types';
 import { cn, formatDate } from '../lib/utils';
 import ImageWithFallback from '../components/ImageWithFallback';
+import AdminProducts from './AdminProducts';
 
 // ─── Post Editor Sub-component ───────────────────────────────────────────────
 function PostEditor({ post, categories, onSave, onCancel }: {
@@ -399,6 +400,7 @@ export default function AdminDashboard() {
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'articles', label: 'Articles', icon: FileText },
     { id: 'categories', label: 'Categories', icon: FolderTree },
+    { id: 'products', label: 'Products', icon: ShoppingBag },
     { id: 'users', label: 'Users', icon: Users },
     { id: 'affiliates', label: 'Affiliates', icon: ExternalLink },
     { id: 'settings', label: 'Settings', icon: Settings },
@@ -513,6 +515,11 @@ export default function AdminDashboard() {
               </div>
             </div>
           </div>
+        )}
+
+        {/* ═══════════════ PRODUCTS TAB ═══════════════ */}
+        {activeTab === 'products' && (
+          <AdminProducts />
         )}
 
         {/* ═══════════════ ARTICLES TAB ═══════════════ */}
